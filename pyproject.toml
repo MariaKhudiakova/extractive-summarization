@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "extractive-summarization"
+version = "0.1.0"
+description = "Simple extractive summarization with a FastAPI service"
+authors = ["Maria Khudiakova"]
+readme = "README.md"
+packages = [
+    { include = "extractive_summarization" },
+    { include = "service" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.2"
+uvicorn = { extras = ["standard"], version = "^0.27.1" }
+pydantic = "^2.6.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+httpx = "^0.26.0"
+black = "^24.1.1"
+isort = "^5.13.2"
+ruff = "^0.2.1"
+mypy = "^1.8.0"
+pre-commit = "^3.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 89
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 89
+
+[tool.ruff]
+line-length = 89
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["extractive_summarization/test", "service/test"]
